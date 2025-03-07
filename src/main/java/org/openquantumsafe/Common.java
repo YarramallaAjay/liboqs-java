@@ -34,7 +34,7 @@ public class Common {
         // Otherwise load the library from the liboqs-java.jar
         } catch (UnsatisfiedLinkError e) {
             String libName = "llliboqs-jni.so";
-            if (Common.isLinux()) {
+            if (Common.isLinux() || OS.contains("nux")) {
                 libName = "liboqs-jni.so";
             } else if (Common.isMac()) {
                 libName = "liboqs-jni.jnilib";
@@ -44,6 +44,15 @@ public class Common {
             URL url = KEMs.class.getResource("/" + libName);
             File tmpDir;
             try {
+                File libFile = new File("target/classes/" + libName);
+                if (libFile.exists()) {
+                    try {
+                        System.load(libFile.getAbsolutePath());
+                        return;
+                    } catch (UnsatisfiedLinkError ex) {
+                        System.err.println("Failed to load native library from target/classes: " + ex.getMessage());
+                    }
+                }
                 tmpDir = Files.createTempDirectory("oqs-native-lib").toFile();
                 tmpDir.deleteOnExit();
                 File nativeLibTmpFile = new File(tmpDir, libName);
