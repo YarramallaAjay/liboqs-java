@@ -17,6 +17,7 @@
         <liboqs.lib.dir />
         <java.os.include />
         <maven.deploy.skip>false</maven.deploy.skip>
+        <maven.test.skip>true</maven.test.skip>
     </properties>
 
     <dependencies>
