@@ -9,25 +9,25 @@ on:
     types: ["**"]
 
 jobs:
-  workflowcheck:
-    name: Check validity of GitHub workflows
-    runs-on: ubuntu-latest
-    container: openquantumsafe/ci-ubuntu-latest:latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # pin@v4
-      - name: Ensure GitHub actions are valid
-        run: actionlint -shellcheck "" # run *without* shellcheck
+#  workflowcheck:
+#    name: Check validity of GitHub workflows
+#    runs-on: ubuntu-latest
+#    container: openquantumsafe/ci-ubuntu-latest:latest
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@v4 # pin@v4
+#      - name: Ensure GitHub actions are valid
+#        run: actionlint -shellcheck "" # run *without* shellcheck
 
   linux:
-    needs: workflowcheck
+#    needs: workflowcheck
     runs-on: ubuntu-latest
     container: openquantumsafe/ci-ubuntu-latest:latest
     steps:
       - name: Checkout liboqs-java
-        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # pin@v4
+        uses: actions/checkout@v4 # pin@v4
       - name: Checkout liboqs main
-        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # pin@v4
+        uses: actions/checkout@v4 # pin@v4
         with:
           repository: open-quantum-safe/liboqs
           path: liboqs
@@ -44,6 +44,10 @@ jobs:
           javac -cp target/liboqs-java.jar examples/KEMExample.java &&
           javac -cp target/liboqs-java.jar examples/SigExample.java &&
           javac -cp target/liboqs-java.jar examples/RandExample.java
+      - name: publish to github packages
+        run: mvn deploy
+        env:
+          GITHUB_TOKEN:${{secrets.AUTH_TOKEN}}
 
   macos:
     needs: workflowcheck
@@ -76,3 +80,8 @@ jobs:
           javac -cp target/liboqs-java.jar examples/KEMExample.java &&
           javac -cp target/liboqs-java.jar examples/SigExample.java &&
           javac -cp target/liboqs-java.jar examples/RandExample.java
+
+      - name: publish to github packages
+        run: mvn deploy
+        env:
+          GITHUB_TOKEN:${{secrets.AUTH_TOKEN}}

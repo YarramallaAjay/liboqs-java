@@ -16,6 +16,7 @@
         <liboqs.include.dir />
         <liboqs.lib.dir />
         <java.os.include />
+        <maven.deploy.skip>false</maven.deploy.skip>
     </properties>
 
     <dependencies>
@@ -141,4 +142,11 @@
             </plugin>
         </plugins>
     </build>
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/YarramallaAjay/liboqs-java</url>
+        </repository>
+    </distributionManagement>
+
 </project>
