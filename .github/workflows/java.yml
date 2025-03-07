@@ -9,18 +9,18 @@ on:
     types: ["**"]
 
 jobs:
-#  workflowcheck:
-#    name: Check validity of GitHub workflows
-#    runs-on: ubuntu-latest
-#    container: openquantumsafe/ci-ubuntu-latest:latest
-#    steps:
-#      - name: Checkout code
-#        uses: actions/checkout@v4 # pin@v4
-#      - name: Ensure GitHub actions are valid
-#        run: actionlint -shellcheck "" # run *without* shellcheck
+ workflowcheck:
+   name: Check validity of GitHub workflows
+   runs-on: ubuntu-latest
+   container: openquantumsafe/ci-ubuntu-latest:latest
+   steps:
+     - name: Checkout code
+       uses: actions/checkout@v4 # pin@v4
+     - name: Ensure GitHub actions are valid
+       run: actionlint -shellcheck "" # run *without* shellcheck
 
   linux:
-#    needs: workflowcheck
+   needs: workflowcheck
     runs-on: ubuntu-latest
     container: openquantumsafe/ci-ubuntu-latest:latest
     steps:
