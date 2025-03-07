@@ -13,7 +13,7 @@ extern "C" {
  * Method:    create_KEM_new
  * Signature: (Ljava/lang/String;)V
  */
-JNIEXPORT void JNICALL Java_org_openquantumsafe_KeyEncapsulation_create_1KEM_1new
+JNIEXPORT void JNICALL Java_npci_cryptocore_KeyEncapsulation_create_1KEM_1new
   (JNIEnv *, jobject, jstring);
 
 /*
@@ -21,7 +21,7 @@ JNIEXPORT void JNICALL Java_org_openquantumsafe_KeyEncapsulation_create_1KEM_1ne
  * Method:    free_KEM
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_org_openquantumsafe_KeyEncapsulation_free_1KEM
+JNIEXPORT void JNICALL Java_npci_cryptocore_KeyEncapsulation_free_1KEM
   (JNIEnv *, jobject);
 
 /*
@@ -29,7 +29,7 @@ JNIEXPORT void JNICALL Java_org_openquantumsafe_KeyEncapsulation_free_1KEM
  * Method:    get_KEM_details
  * Signature: ()Lorg/openquantumsafe/KeyEncapsulation/KeyEncapsulationDetails;
  */
-JNIEXPORT jobject JNICALL Java_org_openquantumsafe_KeyEncapsulation_get_1KEM_1details
+JNIEXPORT jobject JNICALL Java_npci_cryptocore_KeyEncapsulation_get_1KEM_1details
   (JNIEnv *, jobject);
 
 /*
@@ -37,7 +37,7 @@ JNIEXPORT jobject JNICALL Java_org_openquantumsafe_KeyEncapsulation_get_1KEM_1de
  * Method:    generate_keypair
  * Signature: ([B[B)I
  */
-JNIEXPORT jint JNICALL Java_org_openquantumsafe_KeyEncapsulation_generate_1keypair
+JNIEXPORT jint JNICALL Java_npci_cryptocore_KeyEncapsulation_generate_1keypair
   (JNIEnv *, jobject, jbyteArray, jbyteArray);
 
 /*
@@ -45,7 +45,7 @@ JNIEXPORT jint JNICALL Java_org_openquantumsafe_KeyEncapsulation_generate_1keypa
  * Method:    encap_secret
  * Signature: ([B[B[B)I
  */
-JNIEXPORT jint JNICALL Java_org_openquantumsafe_KeyEncapsulation_encap_1secret
+JNIEXPORT jint JNICALL Java_npci_cryptocore_KeyEncapsulation_encap_1secret
   (JNIEnv *, jobject, jbyteArray, jbyteArray, jbyteArray);
 
 /*
@@ -53,7 +53,7 @@ JNIEXPORT jint JNICALL Java_org_openquantumsafe_KeyEncapsulation_encap_1secret
  * Method:    decap_secret
  * Signature: ([B[B[B)I
  */
-JNIEXPORT jint JNICALL Java_org_openquantumsafe_KeyEncapsulation_decap_1secret
+JNIEXPORT jint JNICALL Java_npci_cryptocore_KeyEncapsulation_decap_1secret
   (JNIEnv *, jobject, jbyteArray, jbyteArray, jbyteArray);
 
 #ifdef __cplusplus

@@ -12,7 +12,7 @@ extern "C" {
  * Method:    randombytes
  * Signature: (J)[B
  */
-JNIEXPORT jbyteArray JNICALL Java_org_openquantumsafe_Rand_randombytes
+JNIEXPORT jbyteArray JNICALL Java_npci_cryptocore_Rand_randombytes
   (JNIEnv *, jclass, jlong);
 
 /*
@@ -20,7 +20,7 @@ JNIEXPORT jbyteArray JNICALL Java_org_openquantumsafe_Rand_randombytes
  * Method:    randombytes_switch_algorithm_native
  * Signature: (Ljava/lang/String;)I
  */
-JNIEXPORT jint JNICALL Java_org_openquantumsafe_Rand_randombytes_1switch_1algorithm_1native
+JNIEXPORT jint JNICALL Java_npci_cryptocore_Rand_randombytes_1switch_1algorithm_1native
   (JNIEnv *, jclass, jstring);
 
 #ifdef __cplusplus

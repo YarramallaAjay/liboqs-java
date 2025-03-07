@@ -1,4 +1,4 @@
-import org.openquantumsafe.*;
+import npci.cryptocore.*;
 
 public class RandExample {
 

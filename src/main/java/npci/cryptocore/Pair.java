@@ -1,4 +1,4 @@
-package org.openquantumsafe;
+package npci.cryptocore;
 
 // https://stackoverflow.com/questions/521171/a-java-collection-of-value-pairs-tuples
 public class Pair<L, R> {

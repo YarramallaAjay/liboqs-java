@@ -7,7 +7,7 @@
  * Method:    get_new_KEM
  * Signature: (Ljava/lang/String;)V
  */
-JNIEXPORT void JNICALL Java_org_openquantumsafe_KeyEncapsulation_create_1KEM_1new
+JNIEXPORT void JNICALL Java_npci_cryptocore_KeyEncapsulation_create_1KEM_1new
   (JNIEnv *env, jobject obj, jstring jstr)
 {
     // Create get a liboqs::OQS_KEM pointer
@@ -23,7 +23,7 @@ JNIEXPORT void JNICALL Java_org_openquantumsafe_KeyEncapsulation_create_1KEM_1ne
  * Method:    free_KEM
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_org_openquantumsafe_KeyEncapsulation_free_1KEM
+JNIEXPORT void JNICALL Java_npci_cryptocore_KeyEncapsulation_free_1KEM
   (JNIEnv *env, jobject obj)
 {
     OQS_KEM *kem = (OQS_KEM *) getHandle(env, obj, "native_kem_handle_");
@@ -35,14 +35,14 @@ JNIEXPORT void JNICALL Java_org_openquantumsafe_KeyEncapsulation_free_1KEM
  * Method:    get_KEM_details
  * Signature: ()Lorg/openquantumsafe/KeyEncapsulation/KeyEncapsulationDetails;
  */
-JNIEXPORT jobject JNICALL Java_org_openquantumsafe_KeyEncapsulation_get_1KEM_1details
+JNIEXPORT jobject JNICALL Java_npci_cryptocore_KeyEncapsulation_get_1KEM_1details
   (JNIEnv *env, jobject obj)
 {
-    jclass cls = (*env)->FindClass(env, "org/openquantumsafe/KeyEncapsulation$KeyEncapsulationDetails");
+    jclass cls = (*env)->FindClass(env, "npci/cryptocore/KeyEncapsulation$KeyEncapsulationDetails");
     if (cls == NULL) { fprintf(stderr, "\nCould not find class\n"); return NULL; }
 
     // Get the Method ID of the constructor
-    jmethodID constructor_meth_id_ = (*env)->GetMethodID(env, cls, "<init>", "(Lorg/openquantumsafe/KeyEncapsulation;)V");
+    jmethodID constructor_meth_id_ = (*env)->GetMethodID(env, cls, "<init>", "(Lnpci/cryptocore/KeyEncapsulation;)V");
     if (NULL == constructor_meth_id_) { fprintf(stderr, "\nCould not initialize class\n"); return NULL; }
 
     // Call back constructor to allocate a new instance, with an int argument
@@ -93,7 +93,7 @@ JNIEXPORT jobject JNICALL Java_org_openquantumsafe_KeyEncapsulation_get_1KEM_1de
  * Method:    generate_keypair
  * Signature: ([B[B)I
  */
-JNIEXPORT jint JNICALL Java_org_openquantumsafe_KeyEncapsulation_generate_1keypair
+JNIEXPORT jint JNICALL Java_npci_cryptocore_KeyEncapsulation_generate_1keypair
   (JNIEnv *env, jobject obj, jbyteArray jpublic_key, jbyteArray jsecret_key)
 {
     jbyte *public_key_native = (*env)->GetByteArrayElements(env, jpublic_key, 0);
@@ -115,7 +115,7 @@ JNIEXPORT jint JNICALL Java_org_openquantumsafe_KeyEncapsulation_generate_1keypa
  * Method:    encap_secret
  * Signature: ([B[B[B)I
  */
-JNIEXPORT jint JNICALL Java_org_openquantumsafe_KeyEncapsulation_encap_1secret
+JNIEXPORT jint JNICALL Java_npci_cryptocore_KeyEncapsulation_encap_1secret
   (JNIEnv *env, jobject obj, jbyteArray jciphertext, jbyteArray jshared_secret, jbyteArray jpublic_key)
 {
     // Convert public_key to jbyte array
@@ -139,7 +139,7 @@ JNIEXPORT jint JNICALL Java_org_openquantumsafe_KeyEncapsulation_encap_1secret
  * Method:    decap_secret
  * Signature: ([B[B[B)I
  */
-JNIEXPORT jint JNICALL Java_org_openquantumsafe_KeyEncapsulation_decap_1secret
+JNIEXPORT jint JNICALL Java_npci_cryptocore_KeyEncapsulation_decap_1secret
   (JNIEnv *env, jobject obj, jbyteArray jshared_secret, jbyteArray jciphertext, jbyteArray jsecret_key)
 {
     jbyte *shared_secret_native = (*env)->GetByteArrayElements(env, jshared_secret, 0);

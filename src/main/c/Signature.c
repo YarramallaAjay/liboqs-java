@@ -7,7 +7,7 @@
  * Method:    create_sig_new
  * Signature: (Ljava/lang/String;)V
  */
-JNIEXPORT void JNICALL Java_org_openquantumsafe_Signature_create_1sig_1new
+JNIEXPORT void JNICALL Java_npci_cryptocore_Signature_create_1sig_1new
   (JNIEnv *env, jobject obj, jstring jstr)
 {
     // Create get a liboqs::OQS_SIG pointer
@@ -23,7 +23,7 @@ JNIEXPORT void JNICALL Java_org_openquantumsafe_Signature_create_1sig_1new
  * Method:    free_sig
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_org_openquantumsafe_Signature_free_1sig
+JNIEXPORT void JNICALL Java_npci_cryptocore_Signature_free_1sig
   (JNIEnv *env, jobject obj)
 {
     OQS_SIG *sig = (OQS_SIG *) getHandle(env, obj, "native_sig_handle_");
@@ -35,14 +35,14 @@ JNIEXPORT void JNICALL Java_org_openquantumsafe_Signature_free_1sig
  * Method:    get_sig_details
  * Signature: ()Lorg/openquantumsafe/Signature/SignatureDetails;
  */
-JNIEXPORT jobject JNICALL Java_org_openquantumsafe_Signature_get_1sig_1details
+JNIEXPORT jobject JNICALL Java_npci_cryptocore_Signature_get_1sig_1details
   (JNIEnv *env, jobject obj)
 {
-    jclass cls = (*env)->FindClass(env, "org/openquantumsafe/Signature$SignatureDetails");
+    jclass cls = (*env)->FindClass(env, "npci/cryptocore/Signature$SignatureDetails");
     if (cls == NULL) { fprintf(stderr, "\nCould not find class\n"); return NULL; }
 
     // Get the Method ID of the constructor
-    jmethodID constructor_meth_id_ = (*env)->GetMethodID(env, cls, "<init>", "(Lorg/openquantumsafe/Signature;)V");
+    jmethodID constructor_meth_id_ = (*env)->GetMethodID(env, cls, "<init>", "(Lnpci/cryptocore/Signature;)V");
     if (NULL == constructor_meth_id_) { fprintf(stderr, "\nCould not initialize class\n"); return NULL; }
 
     // Call back constructor to allocate a new instance, with an int argument
@@ -89,7 +89,7 @@ JNIEXPORT jobject JNICALL Java_org_openquantumsafe_Signature_get_1sig_1details
  * Method:    generate_keypair
  * Signature: ([B[B)I
  */
-JNIEXPORT jint JNICALL Java_org_openquantumsafe_Signature_generate_1keypair
+JNIEXPORT jint JNICALL Java_npci_cryptocore_Signature_generate_1keypair
   (JNIEnv *env, jobject obj, jbyteArray jpublic_key, jbyteArray jsecret_key)
 {
     jbyte *public_key_native = (*env)->GetByteArrayElements(env, jpublic_key, 0);
@@ -111,7 +111,7 @@ JNIEXPORT jint JNICALL Java_org_openquantumsafe_Signature_generate_1keypair
  * Method:    sign
  * Signature: ([BLjava/lang/Long;[BJ[B)I
  */
-JNIEXPORT jint JNICALL Java_org_openquantumsafe_Signature_sign
+JNIEXPORT jint JNICALL Java_npci_cryptocore_Signature_sign
   (JNIEnv * env, jobject obj, jbyteArray jsignature, jobject sig_len_obj,
       jbyteArray jmessage, jlong message_len, jbyteArray jsecret_key)
 {
@@ -153,7 +153,7 @@ JNIEXPORT jint JNICALL Java_org_openquantumsafe_Signature_sign
  * Method:    verify
  * Signature: ([BJ[BJ[B)Z
  */
-JNIEXPORT jboolean JNICALL Java_org_openquantumsafe_Signature_verify
+JNIEXPORT jboolean JNICALL Java_npci_cryptocore_Signature_verify
   (JNIEnv *env, jobject obj, jbyteArray jmessage, jlong message_len,
       jbyteArray jsignature, jlong signature_len, jbyteArray jpublic_key)
 {
@@ -180,7 +180,7 @@ JNIEXPORT jboolean JNICALL Java_org_openquantumsafe_Signature_verify
  * Method:    sign_with_ctx_str
  * Signature: ([BLjava/lang/Long;[BJ[B)I
  */
-JNIEXPORT jint JNICALL Java_org_openquantumsafe_Signature_sign_1with_1ctx_1str
+JNIEXPORT jint JNICALL Java_npci_cryptocore_Signature_sign_1with_1ctx_1str
   (JNIEnv * env, jobject obj, jbyteArray jsignature, jobject sig_len_obj,
       jbyteArray jmessage, jlong message_len, jbyteArray jctx, jlong ctx_len,
       jbyteArray jsecret_key)
@@ -225,7 +225,7 @@ JNIEXPORT jint JNICALL Java_org_openquantumsafe_Signature_sign_1with_1ctx_1str
  * Method:    verify_with_ctx_str
  * Signature: ([BJ[BJ[B)Z
  */
-JNIEXPORT jboolean JNICALL Java_org_openquantumsafe_Signature_verify_1with_1ctx_1str
+JNIEXPORT jboolean JNICALL Java_npci_cryptocore_Signature_verify_1with_1ctx_1str
   (JNIEnv *env, jobject obj, jbyteArray jmessage, jlong message_len,
       jbyteArray jsignature, jlong signature_len, jbyteArray jctx, jlong ctx_len,
       jbyteArray jpublic_key)

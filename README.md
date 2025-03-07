@@ -239,7 +239,7 @@ System (default):	81 2B 43 75 8A 22 63 21 28 D2 2D 1C 36 A1 19 19 22 AA E0 86 9A
           Exception in thread "main" java.lang.ExceptionInInitializerError
             at ...
           Caused by: java.lang.NullPointerException
-            at org.openquantumsafe.Common.loadNativeLibrary(Common.java:51)
+            at npci.cryptocore.Common.loadNativeLibrary(Common.java:51)
             at ...
         ```
         try passing to the java library path the directory that contains the native library (e.g., `java -Djava.library.path=src/main/resources/ -cp target/liboqs-java.jar:examples/ KEMExample`).

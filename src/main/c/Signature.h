@@ -12,7 +12,7 @@ extern "C" {
  * Method:    create_sig_new
  * Signature: (Ljava/lang/String;)V
  */
-JNIEXPORT void JNICALL Java_org_openquantumsafe_Signature_create_1sig_1new
+JNIEXPORT void JNICALL Java_npci_cryptocore_Signature_create_1sig_1new
   (JNIEnv *, jobject, jstring);
 
 /*
@@ -20,7 +20,7 @@ JNIEXPORT void JNICALL Java_org_openquantumsafe_Signature_create_1sig_1new
  * Method:    free_sig
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_org_openquantumsafe_Signature_free_1sig
+JNIEXPORT void JNICALL Java_npci_cryptocore_Signature_free_1sig
   (JNIEnv *, jobject);
 
 /*
@@ -28,7 +28,7 @@ JNIEXPORT void JNICALL Java_org_openquantumsafe_Signature_free_1sig
  * Method:    get_sig_details
  * Signature: ()Lorg/openquantumsafe/Signature/SignatureDetails;
  */
-JNIEXPORT jobject JNICALL Java_org_openquantumsafe_Signature_get_1sig_1details
+JNIEXPORT jobject JNICALL Java_npci_cryptocore_Signature_get_1sig_1details
   (JNIEnv *, jobject);
 
 /*
@@ -36,7 +36,7 @@ JNIEXPORT jobject JNICALL Java_org_openquantumsafe_Signature_get_1sig_1details
  * Method:    generate_keypair
  * Signature: ([B[B)I
  */
-JNIEXPORT jint JNICALL Java_org_openquantumsafe_Signature_generate_1keypair
+JNIEXPORT jint JNICALL Java_npci_cryptocore_Signature_generate_1keypair
   (JNIEnv *, jobject, jbyteArray, jbyteArray);
 
 /*
@@ -44,7 +44,7 @@ JNIEXPORT jint JNICALL Java_org_openquantumsafe_Signature_generate_1keypair
  * Method:    sign
  * Signature: ([BLorg/openquantumsafe/Signature/Mutable;[BJ[B)I
  */
-JNIEXPORT jint JNICALL Java_org_openquantumsafe_Signature_sign
+JNIEXPORT jint JNICALL Java_npci_cryptocore_Signature_sign
   (JNIEnv *, jobject, jbyteArray, jobject, jbyteArray, jlong, jbyteArray);
 
 /*
@@ -52,7 +52,7 @@ JNIEXPORT jint JNICALL Java_org_openquantumsafe_Signature_sign
  * Method:    verify
  * Signature: ([BJ[BJ[B)Z
  */
-JNIEXPORT jboolean JNICALL Java_org_openquantumsafe_Signature_verify
+JNIEXPORT jboolean JNICALL Java_npci_cryptocore_Signature_verify
   (JNIEnv *, jobject, jbyteArray, jlong, jbyteArray, jlong, jbyteArray);
 
 /*
@@ -60,7 +60,7 @@ JNIEXPORT jboolean JNICALL Java_org_openquantumsafe_Signature_verify
  * Method:    sign_with_ctx_str
  * Signature: ([BLorg/openquantumsafe/Signature/Mutable;[BJ[BJ[B)I
  */
-JNIEXPORT jint JNICALL Java_org_openquantumsafe_Signature_sign_1with_1ctx_1str
+JNIEXPORT jint JNICALL Java_npci_cryptocore_Signature_sign_1with_1ctx_1str
   (JNIEnv *, jobject, jbyteArray, jobject, jbyteArray, jlong, jbyteArray, jlong, jbyteArray);
 
 /*
@@ -68,7 +68,7 @@ JNIEXPORT jint JNICALL Java_org_openquantumsafe_Signature_sign_1with_1ctx_1str
  * Method:    verify_with_ctx_str
  * Signature: ([BJ[BJ[BJ[B)Z
  */
-JNIEXPORT jboolean JNICALL Java_org_openquantumsafe_Signature_verify_1with_1ctx_1str
+JNIEXPORT jboolean JNICALL Java_npci_cryptocore_Signature_verify_1with_1ctx_1str
   (JNIEnv *, jobject, jbyteArray, jlong, jbyteArray, jlong, jbyteArray, jlong, jbyteArray);
 
 #ifdef __cplusplus

@@ -1,4 +1,4 @@
-name: liboqs-java CI 
+name: liboqs-java CI
 
 on:
   push:
@@ -44,7 +44,19 @@ jobs:
           javac -cp target/liboqs-java.jar examples/KEMExample.java
           javac -cp target/liboqs-java.jar examples/SigExample.java
           javac -cp target/liboqs-java.jar examples/RandExample.java
-      - name: Publish to GitHub Packages
+      - name: Set up Maven settings
+        run: |
+                    mkdir -p ~/.m2
+                    echo "<settings>
+                      <servers>
+                        <server>
+                          <id>github</id>
+                          <username>${{ github.actor }}</username>
+                          <password>${{ secrets.AUTH_TOKEN }}</password>
+                        </server>
+                      </servers>
+                    </settings>" > ~/.m2/settings.xml
+      - name: publish to github packages
         run: mvn deploy
         env:
           GITHUB_TOKEN: ${{ secrets.AUTH_TOKEN }}
@@ -80,7 +92,20 @@ jobs:
           javac -cp target/liboqs-java.jar examples/KEMExample.java
           javac -cp target/liboqs-java.jar examples/SigExample.java
           javac -cp target/liboqs-java.jar examples/RandExample.java
-      - name: Publish to GitHub Packages
+      - name: Set up Maven settings
+        run: |
+          mkdir -p ~/.m2
+          echo "<settings>
+            <servers>
+              <server>
+                <id>github</id>
+                <username>${{ github.actor }}</username>
+                <password>${{ secrets.GITHUB_PAT }}</password>
+              </server>
+            </servers>
+          </settings>" > ~/.m2/settings.xml
+
+      - name: publish to github packages
         run: mvn deploy
         env:
           GITHUB_TOKEN: ${{ secrets.AUTH_TOKEN }}

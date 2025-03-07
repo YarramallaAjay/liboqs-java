@@ -1,4 +1,4 @@
-package org.openquantumsafe;
+package npci.cryptocore;
 
 import java.io.File;
 import java.io.IOException;
@@ -48,6 +48,7 @@ public class Common {
                 if (libFile.exists()) {
                     try {
                         System.load(libFile.getAbsolutePath());
+                        System.out.println("loaded from /target/classes/" + libName);
                         return;
                     } catch (UnsatisfiedLinkError ex) {
                         System.err.println("Failed to load native library from target/classes: " + ex.getMessage());

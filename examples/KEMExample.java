@@ -1,4 +1,4 @@
-import org.openquantumsafe.*;
+import npci.cryptocore.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 

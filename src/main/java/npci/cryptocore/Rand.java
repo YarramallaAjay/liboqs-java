@@ -1,4 +1,4 @@
-package org.openquantumsafe;
+package npci.cryptocore;
 
 /**
  * \brief Class containing RNG-related functions
