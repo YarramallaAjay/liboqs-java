@@ -44,14 +44,14 @@ public class Common {
             URL url = KEMs.class.getResource("/" + libName);
             File tmpDir;
             try {
-                File libFile = new File("target/classes/" + libName);
+                File libFile = new File("/libs/" + libName);
                 if (libFile.exists()) {
                     try {
                         System.load(libFile.getAbsolutePath());
-                        System.out.println("loaded from /target/classes/" + libName);
+                        System.out.println("loaded from /libs" + libName);
                         return;
                     } catch (UnsatisfiedLinkError ex) {
-                        System.err.println("Failed to load native library from target/classes: " + ex.getMessage());
+                        System.err.println("Failed to load native library from libs/: " + ex.getMessage());
                     }
                 }
                 tmpDir = Files.createTempDirectory("oqs-native-lib").toFile();
