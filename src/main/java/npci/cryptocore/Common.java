@@ -30,7 +30,7 @@ public class Common {
     public static void loadNativeLibrary() {
         // If the library is in the java library path, load it directly. (e.g., -Djava.library.path=src/main/resources)
         try {
-            System.loadLibrary("oqs-jni");
+            System.loadLibrary("liboqs-jni");
         // Otherwise load the library from the liboqs-java.jar
         } catch (UnsatisfiedLinkError e) {
             String libName = "llliboqs-jni.so";
