@@ -28,44 +28,62 @@ public class Common {
     }
 
     public static void loadNativeLibrary() {
-        // If the library is in the java library path, load it directly. (e.g., -Djava.library.path=src/main/resources)
-        try {
-            System.loadLibrary("liboqs-jni");
-        // Otherwise load the library from the liboqs-java.jar
-        } catch (UnsatisfiedLinkError e) {
-            String libName = "llliboqs-jni.so";
-            if (Common.isLinux() || OS.contains("nux")) {
-                libName = "liboqs-jni.so";
-            } else if (Common.isMac()) {
-                libName = "liboqs-jni.jnilib";
-            } else if (Common.isWindows()) {
-                libName = "oqs-jni.dll";
-            }
-            URL url = KEMs.class.getResource("/" + libName);
-            File tmpDir;
-            try {
-                File libFile = new File("/target/classes/" + libName);
-                if (libFile.exists()) {
-                    try {
-                        System.load(libFile.getAbsolutePath());
-                        System.out.println("loaded from /target/classes/" + libName);
-                        return;
-                    } catch (UnsatisfiedLinkError ex) {
-                        System.err.println("Failed to load native library from target/classes/: " + ex.getMessage());
-                    }
+    try {
+        System.loadLibrary("oqs-jni");
+        System.out.println("Loaded native lib using System.loadLibrary");
+    } catch (UnsatisfiedLinkError e) {
+        System.err.println("⚠️ System.loadLibrary failed: " + e.getMessage());
+
+        String libName = "liboqs-jni.so";
+        if (isMac()) {
+            libName = "liboqs-jni.jnilib";
+        } else if (isWindows()) {
+            libName = "oqs-jni.dll";
+        }
+
+        // Step 2: Try loading from ${LIBS_DIR}
+        String libsDir = System.getenv("LIBS_DIR"); // or System.getProperty("libs.dir");
+        if (libsDir != null) {
+            File libFromEnv = new File(libsDir, libName);
+            if (libFromEnv.exists()) {
+                try {
+                    System.load(libFromEnv.getAbsolutePath());
+                    System.out.println("Loaded native lib from LIBS_DIR: " + libFromEnv.getAbsolutePath());
+                    return;
+                } catch (UnsatisfiedLinkError ex) {
+                    System.err.println("Failed to load native lib from LIBS_DIR: " + ex.getMessage());
                 }
-                tmpDir = Files.createTempDirectory("oqs-native-lib").toFile();
+            } else {
+                System.err.println("LIBS_DIR set, but file not found at: " + libFromEnv.getAbsolutePath());
+            }
+        } else {
+            System.err.println("LIBS_DIR environment variable not set.");
+        }
+
+        // Step 3: Fallback — extract from JAR
+        try {
+            URL url = KEMs.class.getResource("/" + libName);
+            if (url != null) {
+                File tmpDir = Files.createTempDirectory("oqs-native-lib").toFile();
                 tmpDir.deleteOnExit();
+
                 File nativeLibTmpFile = new File(tmpDir, libName);
                 nativeLibTmpFile.deleteOnExit();
-                InputStream in = url.openStream();
-                Files.copy(in, nativeLibTmpFile.toPath());
-                System.load(nativeLibTmpFile.getAbsolutePath());
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
+
+                try (InputStream in = url.openStream()) {
+                    Files.copy(in, nativeLibTmpFile.toPath());
+                    System.load(nativeLibTmpFile.getAbsolutePath());
+                    System.out.println("Loaded native lib from JAR resource: " + nativeLibTmpFile.getAbsolutePath());
+                }
+            } else {
+                System.err.println("Native lib resource not found in JAR: /" + libName);
             }
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
+}
+
 
     public static <E, T extends Iterable<E>> void print_list(T list) {
         for (Object element : list){
